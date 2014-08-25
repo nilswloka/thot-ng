@@ -1,23 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="thot-ng-client">
 <head lang="en">
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello World!</title>
     <!-- build:css css/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
     <!-- endbower -->
     <!-- endbuild -->
 </head>
 <body>
-<p>Hello World!</p>
-<!-- build:js js/app.js -->
-<script src="scripts/main.js"></script>
-<!-- endbuild -->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">OpenSpace <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="active"><a href="#">Current sessions</a></li>
+                        <li><a href="#">Marketplace</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Register your session</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Conference Program <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Current sessions</a></li>
+                        <li class="active"><a href="#">Overview</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contributors</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<div class="container" ng-controller="OpenSpaceCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <tabset>
+                    <tab ng-repeat="day in days" heading="{{day.date | date: 'shortDate'}}" active="day.active">
+                        <br/>
+                        <table class="table table-striped table-bordered table-responsive">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th ng-repeat="room in roomsFor(day.id)">{{room.name}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="slot in slotsFor(day.id)">
+                                <td>
+                                    {{slot.start | date: 'shortTime'}} -
+                                    {{slot.end | date: 'shortTime'}}
+                                </td>
+                                <td ng-repeat="room in roomsFor(day.id)">Available</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </tab>
+                </tabset>
+        </div>
+    </div>
+</div>
 <!-- build:js js/vendor.js -->
 <!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <!-- endbower -->
+<!-- endbuild -->
+<!-- build:js js/app.js -->
+<script src="scripts/main.js"></script>
 <!-- endbuild -->
 </body>
 </html>
