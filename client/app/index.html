@@ -7,7 +7,7 @@
     <title>Hello World!</title>
     <!-- build:css css/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
 </head>
@@ -61,31 +61,10 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
-<div class="container" ng-controller="OpenSpaceCtrl">
+<div class="container" ng-controller="MainCtrl">
     <div class="row">
         <div class="col-md-12">
-            <tabset>
-                    <tab ng-repeat="day in days" heading="{{day.date | date: 'shortDate'}}" active="day.active">
-                        <br/>
-                        <table class="table table-striped table-bordered table-responsive">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th ng-repeat="room in roomsFor(day.id)">{{room.name}}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="slot in slotsFor(day.id)">
-                                <td>
-                                    {{slot.start | date: 'shortTime'}} -
-                                    {{slot.end | date: 'shortTime'}}
-                                </td>
-                                <td ng-repeat="room in roomsFor(day.id)">Available</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </tab>
-                </tabset>
+            <span health-monitor></span>
         </div>
     </div>
 </div>
@@ -95,10 +74,14 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 <!-- build:js js/app.js -->
 <script src="scripts/main.js"></script>
+<script src="scripts/main-crl.js"></script>
+<script src="scripts/server/health.js"></script>
+<script src="scripts/server/health-monitor.js"></script>
 <!-- endbuild -->
 </body>
 </html>
